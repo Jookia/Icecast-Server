@@ -28,6 +28,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <sys/types.h>
+#include "sighandler.h"
 
 #ifndef _WIN32
 #include <sys/socket.h>
@@ -879,6 +880,9 @@ static void *_slave_thread(void *arg)
         config = config_get_config();
         server_idle_timeout = config->server_idle_timeout;
         config_release_config();
+
+        /* handle any pending signals */
+        sighandler_handle_pending();
 
         /* re-read xml file if requested */
         global_lock();
