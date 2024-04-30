@@ -30,8 +30,8 @@
 #define CATMODULE "sighandler"
 
 #ifndef _WIN32
-sig_atomic_t caught_sig_die = 0;
-sig_atomic_t caught_sig_hup = 0;
+volatile sig_atomic_t caught_sig_die = 0;
+volatile sig_atomic_t caught_sig_hup = 0;
 
 void _sig_hup(int signo);
 void _sig_die(int signo);
